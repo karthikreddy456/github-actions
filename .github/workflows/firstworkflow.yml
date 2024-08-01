@@ -11,5 +11,8 @@ jobs:
               echo "my first workflow"
               ls
               cat README.md
+        - name: cowsay library download
+          run: sudo apt-get install cowsay -y
         - name : Third-party-pipeline
-          run: cowsay -f "This is a cow" >> sample.txt
+          run: cowsay -f dragon "This is a cow" >> sample.txt
+          
