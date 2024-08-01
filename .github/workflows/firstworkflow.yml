@@ -6,9 +6,10 @@ jobs:
         steps:
         - name: checkout
           uses: actions/checkout@v4
-        - name: Hello message
-          run: echo "my first workflow"
-        - name: Listing phase
-          run: ls
-        - name: Reading a file
-          run: cat README.md
+        - name: Multi stage pipeline
+          run: |
+              echo "my first workflow"
+              ls
+              cat README.md
+        - name : Third-party-pipeline
+          run: cowsay -f "This is a cow" >> sample.txt
