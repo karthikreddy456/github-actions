@@ -4,6 +4,8 @@ jobs:
     first_job:
         runs-on: ubuntu-latest
         steps:
+        - name: checkout
+          uses: actions/checkout@v4
         - name: Hello message
           run: echo "my first workflow"
         - name: Listing phase
