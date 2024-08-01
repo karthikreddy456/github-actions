@@ -10,6 +10,8 @@ jobs:
           run: sudo apt-get install cowsay -y
         - name : Third-party-pipeline
           run: cowsay -f dragon "This is a thirdparty library" >> new.txt
+        - name: Display the file
+          run: cat new.txt
         - name: listing phase
           run: ls -ltr
           
