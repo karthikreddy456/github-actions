@@ -19,7 +19,7 @@ jobs:
           with:
               name: my-artifact
               path: new.txt
-    second_job:
+    download_job:
         runs-on: ubuntu-latest
         steps:
         - name: job2
