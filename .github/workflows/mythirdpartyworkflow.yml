@@ -14,4 +14,18 @@ jobs:
           run: cat new.txt
         - name: listing phase
           run: ls -ltr
+        - name: uploading artifact to github
+          uses: actions/upload-artifact@v4
+          with:
+              name: my-artifact
+              path: new.txt
+    second_job:
+        runs-on: ubuntu-latest
+        steps:
+        - name: job2
+          uses: actions/download-artifact@v4
+          with:
+            name: my-artifact
+        - name: Display the file in the download stage
+          run: cat new.txt
           
