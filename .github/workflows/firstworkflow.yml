@@ -4,15 +4,27 @@ jobs:
     first_job:
         runs-on: ubuntu-latest
         steps:
-        - name: checkout
-          uses: actions/checkout@v4
-        - name: Multi stage pipeline
+        - name: Check if Docker is available and install if needed
           run: |
-              echo "my first workflow"
-              ls
-              cat README.md
-        - name: cowsay library download
-          run: sudo apt-get install cowsay -y
-        - name : Third-party-pipeline
-          run: cowsay -f dragon "This is a cow" >> sample.txt
+            if ! command -v docker &> /dev/null; then
+            echo "Docker not found, installing..."
+            sudo apt-get update
+            sudo apt-get install -y \
+                apt-transport-https \
+                ca-certificates \
+                curl \
+                gnupg-agent \
+                software-properties-common
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+            sudo add-apt-repository \
+              "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+            sudo apt-get update
+            sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+            else
+            echo "Docker is available, proceeding with the build."
+            fi
+
+      # Step 2: Verify Docker installation
+        - name: Verify Docker installation
+          run: docker --version
           
